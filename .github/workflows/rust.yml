@@ -9,10 +9,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: Check license headers
         run: ./checks/copyright.sh
-      - name: Install clippy-deny
-        run: cargo install cargo-deny
-      - name: Check dependencies
-        run: cargo deny check
   sanity:
     runs-on: ubuntu-latest
     steps:
