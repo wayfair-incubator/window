@@ -11,3 +11,4 @@
 
 ---
 
+A simple sliding window counter for rust.
