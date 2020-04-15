@@ -79,6 +79,9 @@ where
 
     /// Tries to increment the window by one, this equals `add(1)`. See `add`
     /// for a description of return values.
+    ///
+    /// # Errors
+    /// if we would overshoot the maximum, the error is the number over max.
     pub fn inc(&mut self) -> Result<T, T> {
         self.add(T::from(1))
     }
@@ -86,6 +89,9 @@ where
     /// Tries to add a given number to the windows count. If we remain below
     /// `max` the result is `Ok(<new count>)`. If we fail and would go over
     /// `max` the result is `Err(<count over max>)`.
+    ///
+    /// # Errors
+    /// if we would overshoot the maximum, the error is the number over max.
     pub fn add(&mut self, n: T) -> Result<T, T> {
         let next = self.sum + self.buffer[self.pos] + n;
         if next <= self.max {
@@ -168,19 +174,33 @@ impl TimeWindow {
     }
 
     /// Tries to increment the counter by 1. See `SlidingWindow::inc` for details.
+    ///
+    /// # Errors
+    /// if we would overshoot the maximum, the error is the number over max.
     pub fn inc(&mut self) -> Result<u64, u64> {
         self.add_t(nanotime(), 1)
     }
 
     /// Tries to increment the counter by 1. See `SlidingWindow::inc` for details.
+    ///
+    /// # Errors
+    /// if we would overshoot the maximum, the error is the number over max.
     pub fn inc_t(&mut self, now: u64) -> Result<u64, u64> {
         self.add_t(now, 1)
     }
 
     /// Tries to increment the counter by n. See `SlidingWindow::add` for details.
+    ///
+    /// # Errors
+    /// if we would overshoot the maximum, the error is the number over max.
     pub fn add(&mut self, n: u64) -> Result<u64, u64> {
         self.add_t(nanotime(), n)
     }
+    /// Tries to increment the counter by n. using a given time for now.
+    /// See `SlidingWindow::add` for details.
+    ///
+    /// # Errors
+    /// if we would overshoot the maximum, the error is the number over max.
     pub fn add_t(&mut self, now: u64, n: u64) -> Result<u64, u64> {
         // Convert nanosecond difference to milliseconds
         let mut delta = (now - self.last_tick) / 1_000_000;
