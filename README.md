@@ -4,7 +4,7 @@
 [Quality Checks]: https://github.com/wayfair-incubator/window/workflows/Checks/badge.svg
 [License Checks]: https://github.com/wayfair-incubator/window/workflows/License%20audit/badge.svg
 [Security Checks]: https://github.com/wayfair-incubator/window/workflows/Security%20audit/badge.svg
-[Code Coverage]: https://codecov.io/gh/wayfair-incubator/window/branch/master/graph/badge.svg
+[Code Coverage]: https://codecov.io/gh/wayfair-incubator/window/branch/main/graph/badge.svg
 [codecov.io]: https://codecov.io/gh/wayfair-incubator/window
 
 **Windowed counter**
